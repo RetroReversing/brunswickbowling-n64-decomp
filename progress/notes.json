@@ -1,0 +1,1587 @@
+[
+ {
+  "function": "cordicAtanVectoring",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\n/* identical to cordicAtanVectoring in TWINE (local match library) (matched), with its names changed by decompdecomp */\n/* CORDIC vectoring-mode arctangent: drives y toward zero and accumulates the angle in z. */\nextern s64 D_80097250[]; extern f64 D_80079F30; extern f64 func_80057AC0(s64);\nvoid func_80057680(s64 xin, s64 yin, f64 *out) {\n    s64 x = xin, z = 0, next;\n    s32 i = 0;\n    do {\n        if (yin >= 0) {\n            next = x + (yin >> i);\n            yin -= x >> i;\n            z += D_80097250[i];\n        } else {\n            next = x - (yin >> i);\n            yin += x >> i;\n            z -= D_80097250[i];\n        }\n        x = next;\n        i++;\n    } while (i < 52);\n    *out = func_80057AC0(z) / D_80079F30;\n}",
+  "by": "autopilot",
+  "created_at": 1795621176.323769,
+  "score_before": 6685,
+  "score_after": 2080,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:a6f263797eb260cda5a0316c9e6604bb39a0edfdac70c283ed25ae00f5e55012"
+ },
+ {
+  "function": "cordicAtanVectoring",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\n/* CORDIC vectoring-mode arctangent: drives y toward zero and accumulates the angle in z. */\nextern s64 D_80097250[]; extern f64 D_80079F30; extern f64 func_80057AC0(s64);\nvoid func_80057680(s64 xin, s64 yin, f64 *out) {\n    s64 x = xin, z = 0, next;\n    s32 i = 0;\n    do {\n        if (yin >= 0) {\n            next = x + (yin >> i);\n            yin -= x >> i;\n            z += D_80097250[i];\n        } else {\n            next = x - (yin >> i);\n            yin += x >> i;\n            z -= D_80097250[i];\n        }\n        x = next;\n        i++;\n    } while (i < 52);\n    *out = func_80057AC0(z) / D_80079F30;\n}",
+  "by": "autopilot",
+  "created_at": 1795621176.686316,
+  "score_before": 2080,
+  "score_after": 2080,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:a6f263797eb260cda5a0316c9e6604bb39a0edfdac70c283ed25ae00f5e55012"
+ },
+ {
+  "function": "cordicAtanVectoring",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\n/* identical to func_800BBA10 in ALL STAR TENNIS '99 (local match library) (matched), with its names changed by decompdecomp */\n/* identical to cordicAtanVectoring in TWINE (local match library) (matched), with its names changed by decompdecomp */\n/* CORDIC vectoring-mode arctangent: drives y toward zero and accumulates the angle in z. */\nextern s64 D_80097250[]; extern f64 D_80079F30; extern f64 func_80057AC0(s64);\nvoid func_80057680(s64 xin, s64 yin, f64 *out) {\n    s64 x = xin, z = 0, next;\n    s32 i = 0;\n    do {\n        if (yin >= 0) {\n            next = x + (yin >> i);\n            yin -= x >> i;\n            z += D_80097250[i];\n        } else {\n            next = x - (yin >> i);\n            yin += x >> i;\n            z -= D_80097250[i];\n        }\n        x = next;\n        i++;\n    } while (i < 52);\n    *out = func_80057AC0(z) / D_80079F30;\n}",
+  "by": "autopilot",
+  "created_at": 1795621177.100542,
+  "score_before": 2080,
+  "score_after": 2080,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:a6f263797eb260cda5a0316c9e6604bb39a0edfdac70c283ed25ae00f5e55012"
+ },
+ {
+  "function": "atan",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\n/* identical to atan in TWINE (local match library) (matched), with its names changed by decompdecomp */\ns32 func_80057680(u64,u64,f64 *);\nu64 func_80057B50(f64);\nextern f64 D_80079F38,D_80079F40,D_80079F48,D_80079F50;\n/* Arctangent of x: CORDIC vectoring on a range-reduced fixed-point ratio, then sign restored. */\nf64 func_80057838(f64 x) {\n f64 angle; s32 sign; u64 fixedX,fixedY; f64 threshold;\n if(x<0.0){x=-x;sign=-1;}else sign=1;\n threshold = D_80079F38;\n if(threshold<x){\n f64 ratio = D_80079F40;\n if(x>=ratio){ fixedY=0x1000000000000000ULL; ratio /= x; threshold = D_80079F48; fixedX=func_80057B50(ratio * threshold); }\n else {fixedX=0x1000000000000000ULL;fixedY=func_80057B50(x*D_80079F50);}\n func_80057680(fixedX,fixedY,&angle);\n }else angle=x;\n { f64 result = angle; if(sign<0) result=-result; return result; }\n}",
+  "by": "autopilot",
+  "created_at": 1795621177.4324448,
+  "score_before": 2993,
+  "score_after": 1090,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:f1c6e8fb2574f2ef789df87f29fc6f1286694cd62cbaddda8ceb78d0222df8c9"
+ },
+ {
+  "function": "atan",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\ns32 func_80057680(u64,u64,f64 *);\nu64 func_80057B50(f64);\nextern f64 D_80079F38,D_80079F40,D_80079F48,D_80079F50;\n/* Arctangent of x: CORDIC vectoring on a range-reduced fixed-point ratio, then sign restored. */\nf64 func_80057838(f64 x) {\n f64 angle; s32 sign; u64 fixedX,fixedY; f64 threshold;\n if(x<0.0){x=-x;sign=-1;}else sign=1;\n threshold = D_80079F38;\n if(threshold<x){\n f64 ratio = D_80079F40;\n if(x>=ratio){ fixedY=0x1000000000000000ULL; ratio /= x; threshold = D_80079F48; fixedX=func_80057B50(ratio * threshold); }\n else {fixedX=0x1000000000000000ULL;fixedY=func_80057B50(x*D_80079F50);}\n func_80057680(fixedX,fixedY,&angle);\n }else angle=x;\n { f64 result = angle; if(sign<0) result=-result; return result; }\n}",
+  "by": "autopilot",
+  "created_at": 1795621177.844507,
+  "score_before": 1090,
+  "score_after": 1090,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:f1c6e8fb2574f2ef789df87f29fc6f1286694cd62cbaddda8ceb78d0222df8c9"
+ },
+ {
+  "function": "atan",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\n/* identical to func_800BBBC8 in ALL STAR TENNIS '99 (local match library) (matched), with its names changed by decompdecomp */\n/* identical to atan in TWINE (local match library) (matched), with its names changed by decompdecomp */\ns32 func_80057680(u64,u64,f64 *);\nu64 func_80057B50(f64);\nextern f64 D_80079F38,D_80079F40,D_80079F48,D_80079F50;\n/* Arctangent of x: CORDIC vectoring on a range-reduced fixed-point ratio, then sign restored. */\nf64 func_80057838(f64 x) {\n f64 angle; s32 sign; u64 fixedX,fixedY; f64 threshold;\n if(x<0.0){x=-x;sign=-1;}else sign=1;\n threshold = D_80079F38;\n if(threshold<x){\n f64 ratio = D_80079F40;\n if(x>=ratio){ fixedY=0x1000000000000000ULL; ratio /= x; threshold = D_80079F48; fixedX=func_80057B50(ratio * threshold); }\n else {fixedX=0x1000000000000000ULL;fixedY=func_80057B50(x*D_80079F50);}\n func_80057680(fixedX,fixedY,&angle);\n }else angle=x;\n { f64 result = angle; if(sign<0) result=-result; return result; }\n}",
+  "by": "autopilot",
+  "created_at": 1795621178.117507,
+  "score_before": 1090,
+  "score_after": 1090,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:f1c6e8fb2574f2ef789df87f29fc6f1286694cd62cbaddda8ceb78d0222df8c9"
+ },
+ {
+  "function": "func_80059E30",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\n/* identical to func_80059E30 in TWINE (local match library) (matched), with its names changed by decompdecomp */\ntypedef union { f64 d; u32 w[2]; u8 b[8]; } U;\n\nf64 func_80059E30(f64 x, U *p) {\n    s32 e;\n    s32 i;\n\n    p->d = x;\n    e = ((p->w[0] >> 20) & 0x7FF) - 0x3FF;\n    if (e < 0) {\n        p->w[0] = 0;\n        p->w[1] = 0;\n        return x;\n    }\n    if (e >= 52) {\n        p->d = x;\n        return 0.0;\n    }\n    e += 12;\n    i = e >> 3;\n    p->b[i] &= 0xFF << (8 - (e & 7));\n    while (i < 7) {\n        i++;\n        p->b[i] = 0;\n    }\n    return x - p->d;\n}",
+  "by": "autopilot",
+  "created_at": 1795621180.072957,
+  "score_before": 3425,
+  "score_after": 2305,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:10bba0409868db4f3376fb3bbd857f3e5ecb5be61410cbae4b369c26b5afa55b"
+ },
+ {
+  "function": "func_80059E30",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\ntypedef union { f64 d; u32 w[2]; u8 b[8]; } U;\n\n/* modf: stores the integer part of value in *intPart and returns the fractional part. */ f64 func_80059E30(f64 value, U *intPart) {\n    s32 exponent;\n    s32 byteIndex;\n\n    intPart->d = value;\n    exponent = ((intPart->w[0] >> 20) & 0x7FF) - 0x3FF;\n    if (exponent < 0) {\n        intPart->w[0] = 0;\n        intPart->w[1] = 0;\n        return value;\n    }\n    if (exponent >= 52) {\n        intPart->d = value;\n        return 0.0;\n    }\n    exponent += 12;\n    byteIndex = exponent >> 3;\n    intPart->b[byteIndex] &= 0xFF << (8 - (exponent & 7));\n    while (byteIndex < 7) {\n        byteIndex++;\n        intPart->b[byteIndex] = 0;\n    }\n    return value - intPart->d;\n}",
+  "by": "autopilot",
+  "created_at": 1795621180.600397,
+  "score_before": 2305,
+  "score_after": 2305,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:10bba0409868db4f3376fb3bbd857f3e5ecb5be61410cbae4b369c26b5afa55b"
+ },
+ {
+  "function": "cordicSinCos",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\nextern s64 func_80057B50(f64);\nextern f64 func_80057AC0(s64);\nextern s64 D_80097250[];\nextern f64 D_8007A0F0, D_8007A0F8;\n\n// CORDIC sin/cos: angle is in radians; writes sin to *sinOut and cos to *cosOut.\n/* CORDIC sin/cos: rotates a fixed-point vector by atan steps; writes sin and cos as doubles. */ void func_8005A120(f64 angle, f64 *sinOut, f64 *cosOut) {\n    s64 cosFix = 0x09B74EDA8435E580LL;\n    s64 sinFix = 0;\n    s64 angleLeft = func_80057B50(angle * D_8007A0F0);\n    s64 nextCos;\n    int i;\n    for (i = 0; i < 52; i++) {\n        if (angleLeft >= 0) {\n            nextCos = cosFix - (sinFix >> i);\n            sinFix += cosFix >> i;\n            angleLeft -= D_80097250[i];\n        } else {\n            nextCos = cosFix + (sinFix >> i);\n            sinFix -= cosFix >> i;\n            angleLeft += D_80097250[i];\n        }\n        cosFix = nextCos;\n    }\n    { f64 sinValue = func_80057AC0(sinFix);\n    f64 outScale = D_8007A0F8;\n    *sinOut = sinValue / outScale;\n    *cosOut = func_80057AC0(cosFix) / outScale; }\n}",
+  "by": "autopilot",
+  "created_at": 1795621181.6064372,
+  "score_before": 14045,
+  "score_after": 2930,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:27350b6fc0d3e2865fe4b9c808b750223ad578af7a8e0ea1d63810bde74b6e6a"
+ },
+ {
+  "function": "cordicSinCos",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\n/* identical to cordicSinCos in TWINE (local match library) (matched), with its names changed by decompdecomp */\nextern s64 func_80057B50(f64);\nextern f64 func_80057AC0(s64);\nextern s64 D_80097250[];\nextern f64 D_8007A0F0, D_8007A0F8;\n\n// CORDIC sin/cos: angle is in radians; writes sin to *sinOut and cos to *cosOut.\n/* CORDIC sin/cos: rotates a fixed-point vector by atan steps; writes sin and cos as doubles. */ void func_8005A120(f64 angle, f64 *sinOut, f64 *cosOut) {\n    s64 cosFix = 0x09B74EDA8435E580LL;\n    s64 sinFix = 0;\n    s64 angleLeft = func_80057B50(angle * D_8007A0F0);\n    s64 nextCos;\n    int i;\n    for (i = 0; i < 52; i++) {\n        if (angleLeft >= 0) {\n            nextCos = cosFix - (sinFix >> i);\n            sinFix += cosFix >> i;\n            angleLeft -= D_80097250[i];\n        } else {\n            nextCos = cosFix + (sinFix >> i);\n            sinFix -= cosFix >> i;\n            angleLeft += D_80097250[i];\n        }\n        cosFix = nextCos;\n    }\n    { f64 sinValue = func_80057AC0(sinFix);\n    f64 outScale = D_8007A0F8;\n    *sinOut = sinValue / outScale;\n    *cosOut = func_80057AC0(cosFix) / outScale; }\n}",
+  "by": "autopilot",
+  "created_at": 1795621181.910192,
+  "score_before": 2930,
+  "score_after": 2930,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:27350b6fc0d3e2865fe4b9c808b750223ad578af7a8e0ea1d63810bde74b6e6a"
+ },
+ {
+  "function": "appendString",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\nextern void func_8005A970(s8 *, s8 *);\n#ifdef PORT\n#define ALIGN_BITS(q) ((uintptr_t)(q)&3)\n#else\n#define ALIGN_BITS(q) ((s32)(q)&3)\n#endif\n/* strcat: finds the terminating NUL of dest (word-at-a-time once aligned), then copies src there. */ s8 *func_8005A7B0(s8 *dest, s8 *src) {\n s8 *end = dest; s32 word;\n if(ALIGN_BITS(end)) {do {if(*end==0) goto done; end++;}while(ALIGN_BITS(end));}\n word=*(s32*)end;\n if(word&0xFF000000) {\n do {\n if(!(word&0xFF0000)){end++;goto done;}\n if(!(word&0xFF00)){end+=2;goto done;}\n if(!(word&0xFF)){end+=3;goto done;}\n end+=4; word=*(s32*)end;\n }while(word&0xFF000000);\n }\n done: func_8005A970(end,src); return dest;\n}",
+  "by": "autopilot",
+  "created_at": 1795621182.257376,
+  "score_before": 1735,
+  "score_after": 160,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:99a4075be00429a1846f2f974dbd386b1e2c974eab062c3fd06f535c6c8b30c3"
+ },
+ {
+  "function": "stringCompare",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O2 -fno-schedule-insns -fno-schedule-insns2; review compiler settings before accepting\nCandidate C:\n/* Compares two NUL-terminated strings like strcmp, scanning a word at a time once aligned. */ s32 func_8005A860(const u8 *lhs, const u8 *rhs)\n{\n  s32 diff;\n  u32 ch;\n  u32 lhsWord;\n  u32 rhsWord;\n\n  if (((u32) lhs - (u32) rhs) & 3)\n  {\n    for (;;)\n    {\n      ch = *lhs++;\n      diff = ch - *rhs++;\n      if (diff != 0 || ch == 0)\n        return diff;\n    }\n  }\n  while ((u32) lhs & 3)\n  {\n    ch = *lhs++;\n    diff = ch - *rhs++;\n    if (diff != 0 || ch == 0)\n      return diff;\n  }\n  for (;;)\n  {\n    lhsWord = *(const u32 *) lhs;\n    lhs += 4;\n    rhsWord = *(const u32 *) rhs;\n    diff = lhsWord - rhsWord;\n    rhs += 4;\n    if (diff != 0)\n    {\n      if (!(lhsWord & 0xFF000000))\n        diff = 0xFF000000;\n      else if (!(lhsWord & 0xFF0000))\n        diff = 0xFFFF0000;\n      else if (!(lhsWord & 0xFF00))\n        diff = 0xFFFFFF00;\n      else\n        return diff;\n      return (lhsWord & diff) - (rhsWord & diff);\n    }\n    if ((lhsWord << 24) == 0 || !(lhsWord & 0xFF00) || !(lhsWord & 0xFF0000) || !(lhsWord & 0xFF000000))\n      return diff;\n  }\n}",
+  "by": "autopilot",
+  "created_at": 1795621182.929594,
+  "score_before": 180,
+  "score_after": 180,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:1d6d0b933afe0f68c3af49f5c672ea5eeddd8038bf0131052342dce966c3f799"
+ },
+ {
+  "function": "stringCompare",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 -g; review compiler settings before accepting\nCandidate C:\n/* identical to stringCompare in TWINE (local match library) (matched), with its names changed by decompdecomp */\n/* Compares two NUL-terminated strings like strcmp, scanning a word at a time once aligned. */ s32 func_8005A860(const u8 *lhs, const u8 *rhs)\n{\n  s32 diff;\n  u32 ch;\n  u32 lhsWord;\n  u32 rhsWord;\n\n  if (((u32) lhs - (u32) rhs) & 3)\n  {\n    for (;;)\n    {\n      ch = *lhs++;\n      diff = ch - *rhs++;\n      if (diff != 0 || ch == 0)\n        return diff;\n    }\n  }\n  while ((u32) lhs & 3)\n  {\n    ch = *lhs++;\n    diff = ch - *rhs++;\n    if (diff != 0 || ch == 0)\n      return diff;\n  }\n  for (;;)\n  {\n    lhsWord = *(const u32 *) lhs;\n    lhs += 4;\n    rhsWord = *(const u32 *) rhs;\n    diff = lhsWord - rhsWord;\n    rhs += 4;\n    if (diff != 0)\n    {\n      if (!(lhsWord & 0xFF000000))\n        diff = 0xFF000000;\n      else if (!(lhsWord & 0xFF0000))\n        diff = 0xFFFF0000;\n      else if (!(lhsWord & 0xFF00))\n        diff = 0xFFFFFF00;\n      else\n        return diff;\n      return (lhsWord & diff) - (rhsWord & diff);\n    }\n    if ((lhsWord << 24) == 0 || !(lhsWord & 0xFF00) || !(lhsWord & 0xFF0000) || !(lhsWord & 0xFF000000))\n      return diff;\n  }\n}",
+  "by": "autopilot",
+  "created_at": 1795621183.34754,
+  "score_before": 180,
+  "score_after": 180,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:1d6d0b933afe0f68c3af49f5c672ea5eeddd8038bf0131052342dce966c3f799"
+ },
+ {
+  "function": "libmMathError",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\n/* identical to libmMathError in TWINE (local match library) (matched), with its names changed by decompdecomp */\n/* machine draft (m2c) for gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1, tried by autopilot */\n#ifndef M2C_DEFINES\n#define M2C_DEFINES\ntypedef s32 M2C_UNK;\ntypedef s8 M2C_UNK8;\ntypedef s16 M2C_UNK16;\ntypedef s32 M2C_UNK32;\n#define M2C_FIELD(expr, type_ptr, offset) (*(type_ptr)((s8 *)(expr) + (offset)))\n#define M2C_BITWISE(type, expr) ((type)(expr))\n#define M2C_ERROR(desc) (0)\n#define M2C_CARRY 0\n#define M2C_OVERFLOW(a) (0)\n#endif\n\ns32 func_8005AEF0();\nextern s32 D_800A5A30;\n\nf64 func_8005AE80(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f64 arg4, f64 arg6) {\n    struct {\n        s32 f10;\n        s32 f14;\n        s32 f18;\n        s32 f1C;\n        f64 f20;\n        f64 f28;\n    } __repair_frame;\n\n    __repair_frame.f10 = arg0;\n    __repair_frame.f14 = arg1;\n    __repair_frame.f18 = arg2;\n    __repair_frame.f1C = arg3;\n    __repair_frame.f20 = arg4;\n    __repair_frame.f28 = arg6;\n    if (func_8005AEF0(&__repair_frame) == 0) {\n        D_800A5A30 = ((u32) (arg0 - 3) < 2U) ? 0x22 : 0x21;\n    }\n    return __repair_frame.f28;\n}",
+  "by": "autopilot",
+  "created_at": 1795621183.830351,
+  "score_before": 1230,
+  "score_after": 180,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:ac85446e84195391a7c939fc6535b9d1d45cf7fc5c04d7a29ce1fe658b490a02"
+ },
+ {
+  "function": "libmMathError",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\n/* machine draft (m2c) for gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1, tried by autopilot */\n#ifndef M2C_DEFINES\n#define M2C_DEFINES\ntypedef s32 M2C_UNK;\ntypedef s8 M2C_UNK8;\ntypedef s16 M2C_UNK16;\ntypedef s32 M2C_UNK32;\n#define M2C_FIELD(expr, type_ptr, offset) (*(type_ptr)((s8 *)(expr) + (offset)))\n#define M2C_BITWISE(type, expr) ((type)(expr))\n#define M2C_ERROR(desc) (0)\n#define M2C_CARRY 0\n#define M2C_OVERFLOW(a) (0)\n#endif\n\ns32 func_8005AEF0();\nextern s32 D_800A5A30;\n\n/* Math library error hook: fills an exception record and, if no handler consumes it, sets errno to EDOM (0x21) or ERANGE (0x22) for error types 3 and 4. */ f64 func_8005AE80(s32 errorType, s32 nameLo, s32 nameHi, s32 pad, f64 arg1Value, f64 result) {\n    struct {\n        s32 f10;\n        s32 f14;\n        s32 f18;\n        s32 f1C;\n        f64 f20;\n        f64 f28;\n    } __repair_frame;\n\n    __repair_frame.f10 = errorType;\n    __repair_frame.f14 = nameLo;\n    __repair_frame.f18 = nameHi;\n    __repair_frame.f1C = pad;\n    __repair_frame.f20 = arg1Value;\n    __repair_frame.f28 = result;\n    if (func_8005AEF0(&__repair_frame) == 0) {\n        D_800A5A30 = ((u32) (errorType - 3) < 2U) ? 0x22 : 0x21;\n    }\n    return __repair_frame.f28;\n}",
+  "by": "autopilot",
+  "created_at": 1795621184.536601,
+  "score_before": 180,
+  "score_after": 180,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:ac85446e84195391a7c939fc6535b9d1d45cf7fc5c04d7a29ce1fe658b490a02"
+ },
+ {
+  "function": "libmMathError",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1; review compiler settings before accepting\nCandidate C:\n/* identical to func_800BBF60 in ALL STAR TENNIS '99 (local match library) (matched), with its names changed by decompdecomp */\n/* identical to libmMathError in TWINE (local match library) (matched), with its names changed by decompdecomp */\n/* machine draft (m2c) for gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1, tried by autopilot */\n#ifndef M2C_DEFINES\n#define M2C_DEFINES\ntypedef s32 M2C_UNK;\ntypedef s8 M2C_UNK8;\ntypedef s16 M2C_UNK16;\ntypedef s32 M2C_UNK32;\n#define M2C_FIELD(expr, type_ptr, offset) (*(type_ptr)((s8 *)(expr) + (offset)))\n#define M2C_BITWISE(type, expr) ((type)(expr))\n#define M2C_ERROR(desc) (0)\n#define M2C_CARRY 0\n#define M2C_OVERFLOW(a) (0)\n#endif\n\ns32 func_8005AEF0();\nextern s32 D_800A5A30;\n\nf64 func_8005AE80(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f64 arg4, f64 arg6) {\n    struct {\n        s32 f10;\n        s32 f14;\n        s32 f18;\n        s32 f1C;\n        f64 f20;\n        f64 f28;\n    } __repair_frame;\n\n    __repair_frame.f10 = arg0;\n    __repair_frame.f14 = arg1;\n    __repair_frame.f18 = arg2;\n    __repair_frame.f1C = arg3;\n    __repair_frame.f20 = arg4;\n    __repair_frame.f28 = arg6;\n    if (func_8005AEF0(&__repair_frame) == 0) {\n        D_800A5A30 = ((u32) (arg0 - 3) < 2U) ? 0x22 : 0x21;\n    }\n    return __repair_frame.f28;\n}",
+  "by": "autopilot",
+  "created_at": 1795621184.833952,
+  "score_before": 180,
+  "score_after": 180,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:ac85446e84195391a7c939fc6535b9d1d45cf7fc5c04d7a29ce1fe658b490a02"
+ },
+ {
+  "function": "func_80060C04",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 -fschedule-insns -fschedule-insns2; review compiler settings before accepting\nCandidate C:\n/* identical to func_8003DA04 (matched), with its names changed by decompdecomp */\ns32 func_80033A90();\ns32 func_80067FC0();\ns32 func_800680F0();\nextern s32 D_800A39A0;\nextern char D_80067C70[];\nextern char D_800677A8[];\nextern char D_800B6FF8[];\n\nextern s32 D_80097950;\nextern char D_800A76C0[];\nextern char D_800A76B0[];\n\nvoid func_80060C04(void)\n{\n    s32 sp10;\n\n    if (D_80097950 == 0) {\n        D_80097950 = 1;\n        func_80066C50(D_800A76C0, D_800A76B0, 1);\n        func_800680F0(D_800A76C0, 0, 0);\n    }\n    func_80067FC0(D_800A76C0, &sp10, 1);\n}",
+  "by": "autopilot",
+  "created_at": 1795621187.577991,
+  "score_before": 626,
+  "score_after": 60,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:8f22bbef92e79baef9914db6907e5146bdbd4b4854dc5e9927152666c8d7033f"
+ },
+ {
+  "function": "func_80060C04",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 -fschedule-insns2; review compiler settings before accepting\nCandidate C:\ns32 func_80033A90();\ns32 func_80067FC0();\ns32 func_800680F0();\nextern s32 D_800A39A0;\nextern char D_80067C70[];\nextern char D_800677A8[];\nextern char D_800B6FF8[];\n\nextern s32 D_80097950;\nextern char D_800A76C0[];\nextern char D_800A76B0[];\n\nvoid func_80060C04(void)\n{\n    s32 sp10;\n\n    if (D_80097950 == 0) {\n        D_80097950 = 1;\n        func_80066C50(D_800A76C0, D_800A76B0, 1);\n        func_800680F0(D_800A76C0, 0, 0);\n    }\n    func_80067FC0(D_800A76C0, &sp10, 1);\n}",
+  "by": "autopilot",
+  "created_at": 1795621188.036758,
+  "score_before": 60,
+  "score_after": 60,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:8f22bbef92e79baef9914db6907e5146bdbd4b4854dc5e9927152666c8d7033f"
+ },
+ {
+  "function": "__osEPiRawStartDma",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 492-byte function fingerprint 1fd05c8ab85717d8819a0d8d4fc584dedb786d92; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / libultra 2.0D. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621202.99579,
+  "score_before": 2500,
+  "score_after": 2500,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:a9a29bff6c3adcb22ab84ecac85fcca2766b80b16e06119748327e7a0c6c8490"
+ },
+ {
+  "function": "osCartRomInit",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 376-byte function fingerprint 766e1783bfe4811c108f065a510cf48e3e62de6c; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / libultra 2.0D. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621203.31485,
+  "score_before": null,
+  "score_after": null
+ },
+ {
+  "function": "osAiSetFrequency",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 280-byte function fingerprint 7400d8b7cead745878ce080e442d43b8f380ec9d; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621203.723783,
+  "score_before": 2350,
+  "score_after": 1230,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:d0001f9c4ca1ed66b3dab4ce26b5bfda662d1a92e1206a2685a9da6c1796cba9"
+ },
+ {
+  "function": "alFxNew",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 1176-byte function fingerprint 92d20093ca5893b3d1c00bd692843c0b2d8de1e8; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621204.022629,
+  "score_before": null,
+  "score_after": null
+ },
+ {
+  "function": "alEnvmixerPull",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 1280-byte function fingerprint 2cec2d7d7dc961e13680fbc1118028172e9bddec; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621204.4512231,
+  "score_before": null,
+  "score_after": null
+ },
+ {
+  "function": "_pullSubFrame",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 724-byte function fingerprint eeffc16751a6b5a83d6becf4325a7322c344d8e8; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621204.759147,
+  "score_before": 7176,
+  "score_after": 981,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:d22a05aafc2bab93c2ba1c016424f4b7e2a580701664775691a3e338f9111adb"
+ },
+ {
+  "function": "alFxPull",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 884-byte function fingerprint 59ecc943299085da76fc64b6662e630602ce70c8; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621205.084478,
+  "score_before": 4740,
+  "score_after": 4490,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:874010e8c19a6805ae739677204688434b735e0650f0e928e87173f74a48cc37"
+ },
+ {
+  "function": "alSynSetFXMix",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 160-byte function fingerprint 80c2e3cc817d420d0ba6e3d128f74f8f0cc779d9; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621205.425762,
+  "score_before": 855,
+  "score_after": 855,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:4eb850a60e91cb9aac2e163b949406810acb8da80d67d57c76ad29d8b93d23c4"
+ },
+ {
+  "function": "guLookAt",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 900-byte function fingerprint 628b30b0394986624ff212f8efd8d6b440c7b3eb; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621205.7987251,
+  "score_before": 17701,
+  "score_after": 17701,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:250cc3118009368a6e0824b8ae195b5ea4cb1087013dfe04248056fe4f8609e8"
+ },
+ {
+  "function": "guPerspectiveF",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 432-byte function fingerprint 61e9b61980cfdd582145db58d1f064eeb3480490; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621206.074629,
+  "score_before": 1657,
+  "score_after": 1657,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:d952c1f8419e4191fa447051648f7e3ace201d5d9c71ca05c28ba916cb449ccd"
+ },
+ {
+  "function": "guPerspective",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 456-byte function fingerprint 8a523903885f42763f3802d4f55c590e20837ed2; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621206.757092,
+  "score_before": 2564,
+  "score_after": 2564,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:eac388ecf1d2b2a17e6231808b3e84333cb4c2a4a8700fce0bd3483a2fe60caa"
+ },
+ {
+  "function": "osInitRdb",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 116-byte function fingerprint 41efb9adc83019eac9fe4263bbf43e71690d241b; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621207.024958,
+  "score_before": 55,
+  "score_after": 55,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:eb9ce4c5655106f36767e0ebf6adff7a906a08894c5e09e0eb32c54bdc996018"
+ },
+ {
+  "function": "osSetEventMesg",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 172-byte function fingerprint 4e097ff2158496dab97fea9158af4321443a2d49; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621207.261344,
+  "score_before": 890,
+  "score_after": 885,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:e3c8bf85f8ed61b8260f0007c47bc22d0691a7db76f5f956a03cd15da51c151a"
+ },
+ {
+  "function": "__rmonSetSRegs",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 364-byte function fingerprint 2ac4266751ddf9ac111085161dc231fb22d8c025; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621207.515033,
+  "score_before": 1765,
+  "score_after": 1562,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:45549961b4027055cbec8566d47875ab38cd2410f70c3f0db99f45e6812bc41e"
+ },
+ {
+  "function": "__rmonGetVRegs",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 472-byte function fingerprint ff00c8730031c331e973e144fb04c0955f6d9646; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621207.86404,
+  "score_before": 1987,
+  "score_after": 1987,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:f6e7a7ef6060a34e70798403d1388715e21a07bc261f4494f8014b46bb5f605a"
+ },
+ {
+  "function": "__rmonSetVRegs",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 436-byte function fingerprint c46398d2be84b0cce2143d12fac745687447f65a; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621208.097485,
+  "score_before": 1813,
+  "score_after": 1813,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:06dddcffeb870e8b1f516cae55693fada674d272ad15767781266bf6ec785de6"
+ },
+ {
+  "function": "__rmonMaskIdleThreadInts",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 104-byte function fingerprint 7e7d30418fb1a3dbd32d74f8769366d912a45ca9; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621208.3351839,
+  "score_before": 955,
+  "score_after": 955,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:edfc5fef146c0e35d1042ac4ebb21a4e908aeacb1a35e8e1de636c139eadea38"
+ },
+ {
+  "function": "__rmonGetTCB",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 100-byte function fingerprint b9dae028b25453745d5c654d76d9ea79eb1788a1; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621208.561613,
+  "score_before": 525,
+  "score_after": 525,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:7e7d757232516595365b2e42eac30051d4f0f5627ed80ec92b2e9965c39b635b"
+ },
+ {
+  "function": "__rmonListThreads",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 252-byte function fingerprint 61558b6fd0f9e6fda2b8ed0eaea4686ea3137840; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621208.796366,
+  "score_before": 2116,
+  "score_after": 1500,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:bb598e4beff76021091e107e5b0ecb2ca50913f175ce031a09b9b04eeda7cbd5"
+ },
+ {
+  "function": "__rmonGetThreadStatus",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 472-byte function fingerprint 1533dde040f6222e83908a9eeefc6d97f87f5809; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621209.537641,
+  "score_before": 1180,
+  "score_after": 300,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:9000b91abb69dedb953662df3d591d70c51cbd4aa9405990684b789b845d4311"
+ },
+ {
+  "function": "__rmonThreadStatus",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 88-byte function fingerprint edcec65b1b6a216f445c77b39ef444ad8f87f723; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621209.779826,
+  "score_before": 788,
+  "score_after": 788,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:30dbc3136036ef9d0bf0dfef455cc4e29a60a715b8d1732ffaddc61a9a111713"
+ },
+ {
+  "function": "__rmonRunThread",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 564-byte function fingerprint 8b45d872c25af97e0f89bb51dbef152aae84b82a; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621210.1151161,
+  "score_before": 3371,
+  "score_after": 3371,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:273480a7b485d384d452f246c3b14f757762da93caadc817f61290e09315d379"
+ },
+ {
+  "function": "__rmonSendHeader",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 104-byte function fingerprint 762a358be778dd231ba12f813d9a494adbfeae97; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621210.600102,
+  "score_before": 183,
+  "score_after": 183,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:4e87f61a8bd0f6aa90a109132bfa57f211359fdd5038da64274f8ab208080f12"
+ },
+ {
+  "function": "__rmonSendReply",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 184-byte function fingerprint 5841fd92a14504badbd9272fd3bcf033ca4bab23; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621210.932817,
+  "score_before": 2451,
+  "score_after": 2451,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:ea39f8f3d28d57abf73afc16b583ed26b49a32a111b810e45a69e4eed59b4124"
+ },
+ {
+  "function": "__rmonSendData",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 240-byte function fingerprint 17f271402431a1c41fe4c43a2e74e3a28e0cdcef; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621211.264234,
+  "score_before": 1246,
+  "score_after": 600,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:fd3e2fd031043a9531a5f0340d3ddaca971029070cd1ec1d1d2ac6a713a58f96"
+ },
+ {
+  "function": "rmonMain",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 396-byte function fingerprint 11c9f1918712d219ec9e85f8373245e62385c3b6; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621211.501961,
+  "score_before": 3723,
+  "score_after": 3723,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:489e0b5a97129fb72bc4f5acc02bf325b391af5f18d7c67e467728ca5033d749"
+ },
+ {
+  "function": "__scTaskComplete",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 204-byte function fingerprint 730e7cdb2f79f44a6e58709a9adb9f4af7e7ce0c; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621211.738451,
+  "score_before": 3842,
+  "score_after": 600,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:9f57779605357cc1a8661544a613bf2a863ca2cfe7ca279f750a2eb8064b066f"
+ },
+ {
+  "function": "__scExec",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 220-byte function fingerprint f0c45daff8e4ad11e4408337129dbd57d2fb6891; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621211.966934,
+  "score_before": 590,
+  "score_after": 590,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:7b4db5344d4e51c0706466d2214ef0451dcfa2006289b8073d69281a5f78c594"
+ },
+ {
+  "function": "osDpSetNextBuffer",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 152-byte function fingerprint cfcb5bb5b52d05a7113d012e8e3f69b151f167ed; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / libultra 2.0D. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621212.199175,
+  "score_before": null,
+  "score_after": null
+ },
+ {
+  "function": "osCreateThread",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 208-byte function fingerprint b94d6bfab0646d6c57f169f1323264414aa9f66d; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621212.431645,
+  "score_before": null,
+  "score_after": null
+ },
+ {
+  "function": "osDestroyThread",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 216-byte function fingerprint e635b3f2480ccc681467e8b52467928d7242e208; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621212.666414,
+  "score_before": null,
+  "score_after": null
+ },
+ {
+  "function": "osStartThread",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 280-byte function fingerprint a4a22eacd0967c55f311650f57f1011ac1375390; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621212.902205,
+  "score_before": 2850,
+  "score_after": 2850,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:7ba508af64d89b44cf8fa4fc29744d38fad951155079090946ab1afdd9e74acf"
+ },
+ {
+  "function": "osStopThread",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 180-byte function fingerprint 195cbc2873b5e086bbba97a8c59fb30c20e97797; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621213.1354072,
+  "score_before": 541,
+  "score_after": 541,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:6e358bef16d2583799d5b59a21afc86e2427d24cfee356ccb45a54380fe2da90"
+ },
+ {
+  "function": "osGetTime",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 132-byte function fingerprint 83fa876fd912a83172a993dabad28d14f9b0be9d; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621213.366942,
+  "score_before": 855,
+  "score_after": 855,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:06cea092ecf5b45890c46f9144b1eea3075be14ce2f98800ad4b0dbe67a25093"
+ },
+ {
+  "function": "__osTimerServicesInit",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 84-byte function fingerprint 7ab1bdea2234090aa92f09e3909f559673fb56f1; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621213.600634,
+  "score_before": 430,
+  "score_after": 430,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:03aaa3a4568f1f885b350e356e37155bc5fb33395376fbc58932dcf717a78354"
+ },
+ {
+  "function": "__osTimerInterrupt",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 484-byte function fingerprint 63b91bcf0bca4b2b158ae949b887555e20d67909; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621213.922536,
+  "score_before": 2770,
+  "score_after": 2770,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:51f1a05f21a51751682c96c3c0e14577406c27ea86a8506d7e88f7d0aacfffdf"
+ },
+ {
+  "function": "osPfsAllocateFile",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 780-byte function fingerprint 68f1831767c3e4e49ff7476974ffa6b8995db08c; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621214.3318698,
+  "score_before": null,
+  "score_after": null
+ },
+ {
+  "function": "__osPfsDeclearPage",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 280-byte function fingerprint f7f490a7b7c7dbcc46f18d63cbacec7c432e066f; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621214.726739,
+  "score_before": 3135,
+  "score_after": 3135,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:32de77b26243ca9d4b4a60173d4acb86fa8a6a18f9355cc77a216119cb52787d"
+ },
+ {
+  "function": "osPfsDeleteFile",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 428-byte function fingerprint 543d523dec07b5f23d131b33b74fda895c63ae21; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621214.991063,
+  "score_before": 1799,
+  "score_after": 1799,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:5f78955fc02aa7e278e0b255b6b88bb10ca3456aab159b1bf8294abf1b6f54ea"
+ },
+ {
+  "function": "osPfsReadWriteFile",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 1088-byte function fingerprint 5a3ccdfb139b6ac9a89de24973e924ec9800b623; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621215.299795,
+  "score_before": null,
+  "score_after": null
+ },
+ {
+  "function": "osPfsFileState",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 404-byte function fingerprint 1eadbdcd3ff9ee1ed00afe7939df2c0be009937e; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621216.219912,
+  "score_before": null,
+  "score_after": null
+ },
+ {
+  "function": "osPfsFindFile",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 440-byte function fingerprint ce19f8556317952d11161036a39ca99c185f1711; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621216.8456771,
+  "score_before": 4408,
+  "score_after": 4408,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:9e264f8e2fe00603dd62f06506a733b07ea6bb58378f46726456ddf2829dbf2d"
+ },
+ {
+  "function": "osPfsIsPlug",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 380-byte function fingerprint 3200dfb62f3272d2b390b6d61611f530ab383848; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621217.565671,
+  "score_before": 1995,
+  "score_after": 300,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:132713b98ce4e879dd1b46b50f49b5b5d06f68d90ff646f080d6fcdc88d3ace5"
+ },
+ {
+  "function": "__osPfsRequestData",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 164-byte function fingerprint f88b5120d57558288d08ad476ca8fe77f28cdc19; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621218.253929,
+  "score_before": 4166,
+  "score_after": 4166,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:8f099f22253eb80c84c16a41c549e4f7b0489433b4f2e7132aa228e8d6732009"
+ },
+ {
+  "function": "osPfsFreeBlocks",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 268-byte function fingerprint 5f736b21411e487e104c122f3d78b1111b4fdb73; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621218.5794182,
+  "score_before": null,
+  "score_after": null
+ },
+ {
+  "function": "osPfsInitPak",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 504-byte function fingerprint 3d4e22b141dbd49d3770f3c0f8578b7201d2d839; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621218.826164,
+  "score_before": 2207,
+  "score_after": 2207,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:4d29cb87598275c065175eb6af29a64cd374e4db2702f2188018d27d9877f724"
+ },
+ {
+  "function": "__osPfsCheckRamArea",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 204-byte function fingerprint ac34fad9714cc35a58d11cc0feae052d862f67bd; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621219.0584068,
+  "score_before": 4137,
+  "score_after": 4132,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:7500ddd8f182fc505ff90ca3f9a206776c5fcf7ba72ba3ba78f8c7b4f5dc90e2"
+ },
+ {
+  "function": "corrupted_init",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 344-byte function fingerprint f361b301746c6cfa222d6a085cc4ec0c5ac5198d; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621219.2986848,
+  "score_before": 150,
+  "score_after": 150,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:378716fddbad0d699f8c623258383536049c0ead2dfb380784ccf0988c26a7eb"
+ },
+ {
+  "function": "osPfsRepairId",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 88-byte function fingerprint 8820e4a3c52b1c614158b9b283cada49a63204d4; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621219.5388741,
+  "score_before": 515,
+  "score_after": 515,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:ad08d41ead8c96adf12a0e8379b4838fedda9a77ad4438375d6d04a4b0bcb4ba"
+ },
+ {
+  "function": "__osPfsGetStatus",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 240-byte function fingerprint efcb3924c02c25f7ee9cc3a7b294929e1216ba6c; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621219.775946,
+  "score_before": null,
+  "score_after": null
+ },
+ {
+  "function": "__osPfsRequestOneChannel",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 148-byte function fingerprint f11221b9c50879806b04233972ee2cfbb033829e; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621220.035133,
+  "score_before": 4007,
+  "score_after": 4007,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:39f992aa2a00639b36f928cdcf60e5f502ddde530168120586cc9f4eec9e2371"
+ },
+ {
+  "function": "__osPfsRWInode",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 824-byte function fingerprint 08ae69ae415a83e2c741295d8822b8fafad8f05e; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621220.265572,
+  "score_before": 3716,
+  "score_after": 1800,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:0d010fb45e106e4786280944297399eda2407d717bf0646b279908e3211192c8"
+ },
+ {
+  "function": "__osContRamRead",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 488-byte function fingerprint 307c91a68e807c9cbfad1eeddc1d8281b0c73c5b; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621221.109495,
+  "score_before": 3089,
+  "score_after": 3079,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:c095e145cdf2144ac8711f622875f932b9d549cd50029786be9931211b70de7e"
+ },
+ {
+  "function": "__osContRamWrite",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 516-byte function fingerprint a93229b877187131576b5e31abd61b825adc53f2; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621221.5710678,
+  "score_before": 4608,
+  "score_after": 4598,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:a80ce7c9d4654401900bbb74a0963b846927a96f6d3f37a07a43524d94a7bedf"
+ },
+ {
+  "function": "n_alResampleParam",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 32-byte function fingerprint d13f63695a3e1a4b580dd6e1fadb78be4e28d9d2; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / n_audio 2.0J-2.0L. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621221.913006,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:397f2aa9b22dceba996b6a55b7451ecbdcf6cfe44cdfa8f6d0a8eb812b59935c"
+ },
+ {
+  "function": "ramromMain",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 216-byte function fingerprint c7f371633a11cc1b933d99d4720bcd18fd6d197d; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621222.149867,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:223a146510c708366cd5328f98c3385747e09c7d72643b85fc6f650b33ae4d4a"
+ },
+ {
+  "function": "osEPiStartDma",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 148-byte function fingerprint cd5d596c8a50c680515be872287a9b90ac680b28; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621222.394281,
+  "score_before": 480,
+  "score_after": 0
+ },
+ {
+  "function": "osPiGetCmdQueue",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 32-byte function fingerprint e956fbf2332a8029576ff6d4c3aa3b1f242e8a50; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621222.9491708,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:448cb72bfe84f95d7cf343bb1fe49502bd75270c961f420c91d619b71159efe4"
+ },
+ {
+  "function": "__osDevMgrMain",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 952-byte function fingerprint 2851b5dcdc01ec081d4ffd0c95c76d924e8e87f6; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621223.3260741,
+  "score_before": 0,
+  "score_after": 0
+ },
+ {
+  "function": "__osSetGlobalIntMask",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 64-byte function fingerprint 6e29b8412f24cf38e5a8cd67acba2a2cb1d5e234; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621223.563087,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:50fe7353094469f5f166f785a2b155841a18783ff63653f0b9d3712b997a17d3"
+ },
+ {
+  "function": "__osResetGlobalIntMask",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 72-byte function fingerprint 3238a0f8a3f8c7812678321a473bc58835d86e55; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621223.9965901,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:1e168e9077ca0ef65e7213f7b162ee9c4e44f2b2befa42f76b404ece6f8d9616"
+ },
+ {
+  "function": "__osEPiRawReadIo",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 360-byte function fingerprint 4ae277e5a5c48256abd81b1d9a3182fa30b55c1f; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / libultra 2.0D. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621224.2216299,
+  "score_before": 0,
+  "score_after": 0
+ },
+ {
+  "function": "__osEPiRawWriteIo",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 356-byte function fingerprint 52bb25df48eced7b1b7400db39e9745aea11b1a9; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / libultra 2.0D. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621224.458154,
+  "score_before": 0,
+  "score_after": 0
+ },
+ {
+  "function": "osPiStartDma",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 168-byte function fingerprint b6a54fbb51d333375e0daa0d9e903fbe74bdba69; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621224.693524,
+  "score_before": 976,
+  "score_after": 0
+ },
+ {
+  "function": "osAiSetNextBuffer",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 148-byte function fingerprint 6aef26129e0f8c5a72cacc618b7e1670edfef809; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / libultra 2.0D. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621224.9088461,
+  "score_before": 1246,
+  "score_after": 0
+ },
+ {
+  "function": "alEnvmixerNew",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 184-byte function fingerprint 76ce94af24a508f7d2e8b208543fbbd481be8496; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621225.166295,
+  "score_before": 45,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:3b51e07ebc2a84c268c3ec288b14255459162769dc4c26d9589ccb114709094b"
+ },
+ {
+  "function": "alLoadNew",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 176-byte function fingerprint b3613f3d33cfb4a4368de572c7c6e5c31b00ce54; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621225.392148,
+  "score_before": 25,
+  "score_after": 0
+ },
+ {
+  "function": "alResampleNew",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 140-byte function fingerprint 43ce841ef36af7253d52785c7674be9bf2c57320; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621225.630624,
+  "score_before": 45,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:8e75c7f332b5c3712cacd8b474cd921e95ac3df74f777d20e58ef28ac584ac43"
+ },
+ {
+  "function": "alAuxBusNew",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 92-byte function fingerprint cd537fbd10a5248a2baf3a4ea95154dc3536f811; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621225.8481731,
+  "score_before": 25,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:0e27a5755cb93160a17d555c9171957b0f21c29c0047659e298a4a80c307ebf4"
+ },
+ {
+  "function": "alMainBusNew",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 92-byte function fingerprint 2369c1eb5137cc261b2819ffa7ed20a9f2d996f9; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621226.0812318,
+  "score_before": 25,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:bc102c41cdabf323bcc399a09f1f5186c8e1db7751e6dfaa8f68b43edf589ca1"
+ },
+ {
+  "function": "alSaveNew",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 68-byte function fingerprint e5b350190732b94a3de707f558cec14dfd8edacb; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621226.310886,
+  "score_before": 25,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:89cc8fdc0ad4fba3d264be25d843c9e16e8f58519f0ef0870941b6bab488bf83"
+ },
+ {
+  "function": "alAdpcmPull",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 1092-byte function fingerprint 76894338000cfb1c0e4cbdef284e63f17484d9eb; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621226.545152,
+  "score_before": 6128,
+  "score_after": 0
+ },
+ {
+  "function": "alRaw16Pull",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 924-byte function fingerprint fe63548d44329e193d290899bd97e9575f564597; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621226.778377,
+  "score_before": 0,
+  "score_after": 0
+ },
+ {
+  "function": "alLoadParam",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 428-byte function fingerprint 3a4cfb05a808056c79c82a98681d7e7a268e9a2f; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621227.012519,
+  "score_before": 1130,
+  "score_after": 0
+ },
+ {
+  "function": "_decodeChunk",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 376-byte function fingerprint 9bcc493cfdc339b97f15a8385841b45f2cdf9edf; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621227.5990632,
+  "score_before": 1980,
+  "score_after": 0
+ },
+ {
+  "function": "alEnvmixerParam",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 212-byte function fingerprint 9f20221bee3407a38fb68e63aa1479a35831f836; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621227.83776,
+  "score_before": 2360,
+  "score_after": 0
+ },
+ {
+  "function": "_frexpf",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 224-byte function fingerprint 7b2612622d6973c6c7f1ccfa02bc028c9ac04979; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621228.0697012,
+  "score_before": 1830,
+  "score_after": 0
+ },
+ {
+  "function": "_ldexpf",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 36-byte function fingerprint 5ddd98b46a4e44095be3caaceea38659d81948fc; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621228.30604,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:d5dc235b4f0ab524b6ebe5068ad9dcdb9c9d5c6f57e2d92980bdf2ddd9dd1f11"
+ },
+ {
+  "function": "_getVol",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 132-byte function fingerprint f004092af8bd6562a5f22f90724f4d090677d541; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621228.539475,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:eab26f1d17d72693d219909499d9bbdbf8f0a5fe7c8e1a8c2a6e80a0febd9d7d"
+ },
+ {
+  "function": "alResamplePull",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 492-byte function fingerprint cde099432ba8e4b60a42c3da37149df5da063355; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621228.7629519,
+  "score_before": 2831,
+  "score_after": 0
+ },
+ {
+  "function": "alResampleParam",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 192-byte function fingerprint f1184c05be6c4180c14416e6cb68ffe10c5a1133; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621228.992884,
+  "score_before": 0,
+  "score_after": 0
+ },
+ {
+  "function": "alFxParamHdl",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 496-byte function fingerprint cb7b953acc2d95e9fbba963c4061783696b3c4c5; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621229.242548,
+  "score_before": 600,
+  "score_after": 0
+ },
+ {
+  "function": "_loadOutputBuffer",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 536-byte function fingerprint 4db42cb70ff16a602d30af182a0c9bc9dc519d6b; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621229.478058,
+  "score_before": 1420,
+  "score_after": 0
+ },
+ {
+  "function": "_loadBuffer",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 368-byte function fingerprint e9559f9918311d029f006efbed5d9cdce1ec465e; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621229.702503,
+  "score_before": 3332,
+  "score_after": 0
+ },
+ {
+  "function": "_saveBuffer",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 368-byte function fingerprint 160a18ebe6427dad3837579f1a8e8a5ab79a5e23; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621229.9243982,
+  "score_before": 2795,
+  "score_after": 0
+ },
+ {
+  "function": "_filterBuffer",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 156-byte function fingerprint 411dcd4b64cb7f872285d52db9ca53a1f204fc2f; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621230.154517,
+  "score_before": 205,
+  "score_after": 0
+ },
+ {
+  "function": "_doModFunc",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 140-byte function fingerprint 8dbb37a75d9e0c81740a125128dda33e59a0c1b9; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621230.385668,
+  "score_before": 420,
+  "score_after": 0
+ },
+ {
+  "function": "alSaveParam",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 40-byte function fingerprint 78b2c3730a8324f46630a153b288c8697355cb5f; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621230.620637,
+  "score_before": 640,
+  "score_after": 0
+ },
+ {
+  "function": "alInit",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 44-byte function fingerprint 4f66ab3f1e061dfed1a76bda8ace7d49073dd9a5; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621230.8646789,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:f1f8798c692a29846d65e975a1c8825527224e8ba29fe61525012579346259f8"
+ },
+ {
+  "function": "alClose",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 48-byte function fingerprint 82b28d4f897ed8e551d622ba822524f8e28067cc; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621231.0957272,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:a084e12ab137b2bc9e624ab9d4e825bbd0543f7d814649c08f4c290159244816"
+ },
+ {
+  "function": "alLink",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 32-byte function fingerprint 532acd11d332cb364420fcdb08d6295a51f95f38; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621231.328415,
+  "score_before": 60,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:db19e19c56e8a1c92d64c29b92a1617d252d206ae90cc49e565d74f2cdd148a2"
+ },
+ {
+  "function": "alUnlink",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 48-byte function fingerprint b68719e439de70f2d85e5197fed0e6d564d14965; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621231.5418859,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:23fd214e5670457e2483d480bb70bbdba31b5068e93d2021e19abc0ec9d3838b"
+ },
+ {
+  "function": "alHeapInit",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 52-byte function fingerprint 77be58133f99cf40b87bc66a392f760d673f019e; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621231.756332,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:adab8652173881c311bcbc182245a1ca0972b0d93c49ba0e37107cc2d31a9e86"
+ },
+ {
+  "function": "alHeapDBAlloc",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 72-byte function fingerprint 2a0a8a6da37f2690e81293d7b9f8a62338c2986d; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621231.973488,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:73ec4c6552ec7e91adec8ac1198eba3c89e10f18360fedfe6f54f7ec65a26766"
+ },
+ {
+  "function": "alAudioFrame",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 432-byte function fingerprint 0e9d5fb67ed2bb0e71ff84900b6f8d63dd2b5a57; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621232.189848,
+  "score_before": 300,
+  "score_after": 0
+ },
+ {
+  "function": "__allocParam",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 44-byte function fingerprint 6a7880e1a8a4425dcfc31f6be05193820669d7c0; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621232.413592,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:760e7b7904d377a827618e767a5c45a2955331753caff2ce4c541e8d368a8f50"
+ },
+ {
+  "function": "_collectPVoices",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 84-byte function fingerprint c2f18bddd16e806324e25708593239f8a51ef21d; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621232.9032488,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:ab75eeb8756dd0800fd3f788f2ed47fc9b64f979da268ae181bc7aedc500bf8b"
+ },
+ {
+  "function": "_freePVoice",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 64-byte function fingerprint df834505d2b83ba298eb34d774f6eb35addc6393; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621233.128701,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:5940d2a988e4c776316d0fa072d9fdb868cd324fd9f4d733235ac288fb3c28b2"
+ },
+ {
+  "function": "_timeToSamplesNoRound",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 72-byte function fingerprint c86d034723f946c8dc9c22d64e28949a6ebf5914; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621233.343949,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:1b76a9c893e98dbd070f77005edb7bcb35a2165c180b4a8500f10e2ce195329a"
+ },
+ {
+  "function": "_timeToSamples",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 76-byte function fingerprint f8d98550dec1b8ba2c81d24eae5855ef41bbfb18; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621233.5588322,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:fbe3b4f5f7cd668a6add2ecd0551e1bef97f40652e6dbded291c57957ded9af4"
+ },
+ {
+  "function": "__nextSampleTime",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 84-byte function fingerprint 6ae8850be241d6aefe0e55439c9e4b1e6a88c338; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621233.7855098,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:45f2579a9e52dbf7aeda17f36bfcf48dcfe55cc154ede65e5aa2e8c931658f38"
+ },
+ {
+  "function": "alSynAddPlayer",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 80-byte function fingerprint a0ccfd9b5a2a3cad0c344b6dc8b314c6f61e89cc; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795621234.0264032,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:403bde8ec411f49684831d761e2c232368bde9ddf5f2eaee81833706b2be7f37"
+ },
+ {
+  "function": "func_800597E4",
+  "text": "Profile probe: this saved C scores 612 under gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 (8 of its 12 nearest matched neighbours were built with it), 1294 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "autopilot",
+  "created_at": 1795621566.206388,
+  "score_before": 1294,
+  "score_after": 612,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:b6114fca8ce403d7e3b55a0d807bdeb0a81b3b659d1ed527342dae5b51a639c7"
+ },
+ {
+  "function": "func_80059858",
+  "text": "Profile probe: this saved C scores 612 under gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 (8 of its 12 nearest matched neighbours were built with it), 1294 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "autopilot",
+  "created_at": 1795621568.689567,
+  "score_before": 1294,
+  "score_after": 612,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:75989dd232a52d3575e1e9face28fa52b6040184541ea42d172b8d2990483ae4"
+ },
+ {
+  "function": "func_800583CC",
+  "text": "Profile probe: this saved C scores 210 under gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 (8 of its 12 nearest matched neighbours were built with it), 965 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "autopilot",
+  "created_at": 1795621587.9322371,
+  "score_before": 965,
+  "score_after": 210,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:60e839f71274c1c064b104e4c85dc708e7629172bce35a8cd65a0bbfb2d33462"
+ },
+ {
+  "function": "func_8006C3A4",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 -fschedule-insns -fschedule-insns2; review compiler settings before accepting\nCandidate C:\n/* identical to func_8003DA04 (matched), with its names changed by decompdecomp */\ns32 func_80033A90();\ns32 func_80067FC0();\ns32 func_800680F0();\nextern s32 D_800A39A0;\nextern char D_80067C70[];\nextern char D_800677A8[];\nextern char D_800B6FF8[];\n\nextern s32 D_80097DB0;\nextern char D_800ACBB0[];\nextern char D_800ACBA0[];\n\nvoid func_8006C3A4(void)\n{\n    s32 sp10;\n\n    if (D_80097DB0 == 0) {\n        D_80097DB0 = 1;\n        func_80066C50(D_800ACBB0, D_800ACBA0, 1);\n        func_800680F0(D_800ACBB0, 0, 0);\n    }\n    func_80067FC0(D_800ACBB0, &sp10, 1);\n}",
+  "by": "autopilot",
+  "created_at": 1795621682.516727,
+  "score_before": 626,
+  "score_after": 300,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:ace4739608f592960f45faa7cfbd44fb8b3fee7ee8447d0f6c7c5ba3ed3ffd6c"
+ },
+ {
+  "function": "func_8006C3A4",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 -fschedule-insns2; review compiler settings before accepting\nCandidate C:\ns32 func_80033A90();\ns32 func_80067FC0();\ns32 func_800680F0();\nextern s32 D_800A39A0;\nextern char D_80067C70[];\nextern char D_800677A8[];\nextern char D_800B6FF8[];\n\nextern s32 D_80097DB0;\nextern char D_800ACBB0[];\nextern char D_800ACBA0[];\n\nvoid func_8006C3A4(void)\n{\n    s32 sp10;\n\n    if (D_80097DB0 == 0) {\n        D_80097DB0 = 1;\n        func_80066C50(D_800ACBB0, D_800ACBA0, 1);\n        func_800680F0(D_800ACBB0, 0, 0);\n    }\n    func_80067FC0(D_800ACBB0, &sp10, 1);\n}",
+  "by": "autopilot",
+  "created_at": 1795621685.781142,
+  "score_before": 300,
+  "score_after": 300,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:ace4739608f592960f45faa7cfbd44fb8b3fee7ee8447d0f6c7c5ba3ed3ffd6c"
+ },
+ {
+  "function": "func_80054BA0",
+  "text": "Compiler detection: func_80054BA0's saved C scores 60 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 120 under its own settings. Evidence: 3 of 12 matched neighbours were judged with it. Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683594903",
+  "created_at": 1795622885.805297,
+  "score_before": 120,
+  "score_after": 60
+ },
+ {
+  "function": "func_8000EBB0",
+  "text": "Compiler detection: func_8000EBB0's saved C scores 90 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 230 under its own settings. Evidence: the judge's scores alone. Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683593739",
+  "created_at": 1795622892.742322,
+  "score_before": 230,
+  "score_after": 90
+ },
+ {
+  "function": "func_80016218",
+  "text": "Compiler detection: func_80016218's saved C scores 60 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 260 under its own settings. Evidence: 3 of 12 matched neighbours were judged with it. Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683593856",
+  "created_at": 1795622892.745167,
+  "score_before": 260,
+  "score_after": 60
+ },
+ {
+  "function": "func_80054BDC",
+  "text": "Compiler detection: func_80054BDC's saved C scores 60 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 120 under its own settings. Evidence: 3 of 12 matched neighbours were judged with it. Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683594904",
+  "created_at": 1795622893.470794,
+  "score_before": 120,
+  "score_after": 60
+ },
+ {
+  "function": "func_8002E950",
+  "text": "Compiler detection: func_8002E950's saved C scores 140 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 285 under its own settings. Evidence: 7 of 12 matched neighbours were judged with it. Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683594353",
+  "created_at": 1795622903.766028,
+  "score_before": 285,
+  "score_after": 140
+ },
+ {
+  "function": "func_80037248",
+  "text": "Compiler detection: func_80037248's saved C scores 25 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 220 under its own settings. Evidence: the judge's scores alone. Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683594477",
+  "created_at": 1795622911.148733,
+  "score_before": 220,
+  "score_after": 25
+ },
+ {
+  "function": "func_80013758",
+  "text": "Compiler detection: func_80013758's saved C scores 20 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 275 under its own settings. Evidence: 2 of 12 matched neighbours were judged with it; its code habits agree with that compiler better (+2 against +0). Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683593816",
+  "created_at": 1795622913.439453,
+  "score_before": 275,
+  "score_after": 20
+ },
+ {
+  "function": "func_80016DE4",
+  "text": "Compiler detection: func_80016DE4's saved C scores 5 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 215 under its own settings. Evidence: 5 of 12 matched neighbours were judged with it. Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683593878",
+  "created_at": 1795622921.499923,
+  "score_before": 215,
+  "score_after": 5
+ },
+ {
+  "function": "func_8002253C",
+  "text": "Compiler detection: func_8002253C's saved C scores 130 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 275 under its own settings. Evidence: 1 of 12 matched neighbours were judged with it. Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683594105",
+  "created_at": 1795622931.897286,
+  "score_before": 275,
+  "score_after": 130
+ },
+ {
+  "function": "func_8002D2D0",
+  "text": "Compiler detection: func_8002D2D0's saved C scores 5 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 275 under its own settings. Evidence: 1 of 12 matched neighbours were judged with it. Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683594283",
+  "created_at": 1795622960.1111512,
+  "score_before": 275,
+  "score_after": 5
+ },
+ {
+  "function": "func_80049BE8",
+  "text": "Compiler detection: func_80049BE8's saved C scores 30 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 285 under its own settings. Evidence: 7 of 12 matched neighbours were judged with it; its code habits agree with that compiler better (+1 against -1). Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683594734",
+  "created_at": 1795622962.116008,
+  "score_before": 285,
+  "score_after": 30
+ },
+ {
+  "function": "func_800138E4",
+  "text": "Compiler detection: func_800138E4's saved C scores 10 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64, 290 under its own settings. Evidence: 3 of 12 matched neighbours were judged with it; the compiler map puts its address in that compiler's stretch. Suggested on the project page for review; nothing was applied. Try its C with that compiler (try_compiler) before more source spellings.",
+  "by": "permuter-184683593821",
+  "created_at": 1795623006.986829,
+  "score_before": 290,
+  "score_after": 10
+ },
+ {
+  "function": "func_8002E950",
+  "text": "Profile probe: this saved C scores 140 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (8 of its 12 nearest matched neighbours were built with it), 285 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594353",
+  "created_at": 1795623106.8490722,
+  "score_before": 285,
+  "score_after": 140
+ },
+ {
+  "function": "func_8004CDAC",
+  "text": "Profile probe: this saved C scores 130 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (9 of its 12 nearest matched neighbours were built with it), 335 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594756",
+  "created_at": 1795623108.5213912,
+  "score_before": 335,
+  "score_after": 130
+ },
+ {
+  "function": "func_8004CAD8",
+  "text": "Profile probe: this saved C scores 275 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (9 of its 12 nearest matched neighbours were built with it), 555 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594747",
+  "created_at": 1795623132.555157,
+  "score_before": 555,
+  "score_after": 275
+ },
+ {
+  "function": "func_80051204",
+  "text": "Profile probe: this saved C scores 550 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (8 of its 12 nearest matched neighbours were built with it), 750 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594860",
+  "created_at": 1795623132.623164,
+  "score_before": 750,
+  "score_after": 550
+ },
+ {
+  "function": "func_8004CDEC",
+  "text": "Profile probe: this saved C scores 380 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (9 of its 12 nearest matched neighbours were built with it), 785 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594757",
+  "created_at": 1795623133.140071,
+  "score_before": 785,
+  "score_after": 380
+ },
+ {
+  "function": "func_80047898",
+  "text": "Profile probe: this saved C scores 20 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (8 of its 12 nearest matched neighbours were built with it), 320 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594707",
+  "created_at": 1795623134.210727,
+  "score_before": 320,
+  "score_after": 20
+ },
+ {
+  "function": "func_800486EC",
+  "text": "Profile probe: this saved C scores 505 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (8 of its 12 nearest matched neighbours were built with it), 635 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594727",
+  "created_at": 1795623134.451496,
+  "score_before": 635,
+  "score_after": 505
+ },
+ {
+  "function": "func_8004DE50",
+  "text": "Profile probe: this saved C scores 930 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (8 of its 12 nearest matched neighbours were built with it), 1130 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594785",
+  "created_at": 1795623134.871438,
+  "score_before": 1130,
+  "score_after": 930
+ },
+ {
+  "function": "func_8001EBE4",
+  "text": "Profile probe: this saved C scores 2120 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (8 of its 12 nearest matched neighbours were built with it), 2610 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594010",
+  "created_at": 1795623147.751106,
+  "score_before": 2610,
+  "score_after": 2120
+ },
+ {
+  "function": "func_80050988",
+  "text": "Profile probe: this saved C scores 245 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (8 of its 12 nearest matched neighbours were built with it), 435 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594845",
+  "created_at": 1795623149.89803,
+  "score_before": 435,
+  "score_after": 245
+ },
+ {
+  "function": "func_8004EBD0",
+  "text": "Profile probe: this saved C scores 295 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (8 of its 12 nearest matched neighbours were built with it), 899 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594802",
+  "created_at": 1795623151.8768902,
+  "score_before": 899,
+  "score_after": 295
+ },
+ {
+  "function": "func_8004EA60",
+  "text": "Profile probe: this saved C scores 60 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (8 of its 12 nearest matched neighbours were built with it), 524 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594800",
+  "created_at": 1795623153.276905,
+  "score_before": 524,
+  "score_after": 60
+ },
+ {
+  "function": "func_80051240",
+  "text": "Profile probe: this saved C scores 190 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (8 of its 12 nearest matched neighbours were built with it), 1175 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594861",
+  "created_at": 1795623154.2903,
+  "score_before": 1175,
+  "score_after": 190
+ },
+ {
+  "function": "func_800512F0",
+  "text": "Profile probe: this saved C scores 190 under sn-n64-281 -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mfp64 (8 of its 12 nearest matched neighbours were built with it), 1175 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594862",
+  "created_at": 1795623156.8292968,
+  "score_before": 1175,
+  "score_after": 190
+ },
+ {
+  "function": "alSynAllocVoice",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 296-byte function fingerprint e476f978c577bffac87d917b6a2b85338317637f; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623467.137271,
+  "score_before": 1705,
+  "score_after": 0
+ },
+ {
+  "function": "_allocatePVoice",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 184-byte function fingerprint 5e365fc64ad1b6273951cfa51d7ada567819dec1; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623473.412828,
+  "score_before": 351,
+  "score_after": 0
+ },
+ {
+  "function": "alSynStopVoice",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 124-byte function fingerprint 8df89180a1d0a570a88ff0002b9658e36efd520c; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623480.974925,
+  "score_before": 325,
+  "score_after": 0
+ },
+ {
+  "function": "alSynStartVoice",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 148-byte function fingerprint b6797613d4ac91295d60294380304995023a1419; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623494.9078588,
+  "score_before": 745,
+  "score_after": 0
+ },
+ {
+  "function": "alSynSetVol",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 184-byte function fingerprint 66a0b72af7099c7ff87227f878d38cf671b9fa47; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623541.2230358,
+  "score_before": 435,
+  "score_after": 0
+ },
+ {
+  "function": "alSynSetPan",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 144-byte function fingerprint d871a184efd83b9069b9d585060e96eee6847d08; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623621.9004328,
+  "score_before": 745,
+  "score_after": 0
+ },
+ {
+  "function": "osContStartReadData",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 136-byte function fingerprint bf97a68a31b7b324e061fa1dd97b223f33ac605a; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623629.515136,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:4031c6b39748479149cf9280fbd80e5e05e26a01d5bf95fa5f56a08e62f260ea"
+ },
+ {
+  "function": "osContGetReadData",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 156-byte function fingerprint 58164e0a0d26c83ff17a62dffbf5a295203b282f; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623642.768991,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:42c51d32432d64dc941c5131df74269fc1cd34d6db5e342ebc7149efa248ab56"
+ },
+ {
+  "function": "__osPackReadData",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 184-byte function fingerprint 4e34fd28e56a0f0bb7e911ab06fa7c6e7b67f46e; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623658.317024,
+  "score_before": 4322,
+  "score_after": 0
+ },
+ {
+  "function": "__osPackRequestData",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 188-byte function fingerprint 2d61deb2b7f2afcf8dcb00f21046ce928abf459b; one name across selected SDK signatures, unique target fingerprint. Libraries: built in / decompals/ultralib e24c836796df. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623685.758337,
+  "score_before": 4712,
+  "score_after": 0
+ },
+ {
+  "function": "osVirtualToPhysical",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 84-byte function fingerprint e65a1f7910946ba35c4d9c88a9973e423e0a35d2; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623689.610184,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:875af14b1634385d268292f9ae8b0909f0220026d14515a7b0feab6014c0daf8"
+ },
+ {
+  "function": "guMtxCatF",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 220-byte function fingerprint 973636af6159e0b9d793b04df21da638ff0b8899; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623693.9322612,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:3732aafb49901f2625cb7990b46b9201c51626e95b96bb2c240b2154c76226cb"
+ },
+ {
+  "function": "guMtxXFMF",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 172-byte function fingerprint 026c754da09b5636fec302df1db82c9622c3bd8f; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623697.710123,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:f6824d48cf061e898f8ccac24e6894ec8c6bb141932b2c975200f251ab5b048f"
+ },
+ {
+  "function": "guMtxCatL",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 116-byte function fingerprint 63b836e8086a70f1808c6cdc932227ea4aa76299; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623702.218595,
+  "score_before": 12,
+  "score_after": 0
+ },
+ {
+  "function": "guMtxXFML",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 140-byte function fingerprint 9bab7300f370462a2a2e9920be9652e7d2c9a075; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623705.570931,
+  "score_before": 2500,
+  "score_after": 0
+ },
+ {
+  "function": "guMtxF2L",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 152-byte function fingerprint 170e9c4ae64a1c102e58b82d2ed7aecdac5aee4e; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623715.03982,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:6b2419377315d525d3308be200054bab40142598db5b7c31e32a82822d978e1f"
+ },
+ {
+  "function": "guMtxIdentF",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 80-byte function fingerprint 246a41c01ae6042285dbe81aeb8b7fe77da6cd0f; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623720.2316852,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:4ce8b11d702ea5b194be52c353660b9701bf06c1e53be653690908a641298da9"
+ },
+ {
+  "function": "guOrthoF",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 304-byte function fingerprint 913ffcbcad416b9fce4f084ca15bb1812d149772; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623726.656992,
+  "score_before": 835,
+  "score_after": 0
+ },
+ {
+  "function": "guOrtho",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 332-byte function fingerprint 7bcbebd420c57a3864d2ec5388e7a4ad5b8957d6; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623738.809036,
+  "score_before": 4073,
+  "score_after": 0
+ },
+ {
+  "function": "osCreateMesgQueue",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 36-byte function fingerprint 807f419908f03446320df82e920b1dcfacc23e25; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623778.071177,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:fdd51d4c247899a7a673961b7fb06f124416149dd17df46b510bde67e2eb74bf"
+ },
+ {
+  "function": "osJamMesg",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 308-byte function fingerprint a8899408103bd627f920cacecf0290610a9e1c86; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623806.2243671,
+  "score_before": 1033,
+  "score_after": 0
+ },
+ {
+  "function": "osReadHost",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 196-byte function fingerprint 59c56347adb6c562ebaff5b96b2065a14fa5920e; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623817.4549592,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:ffb8bdc1b15a7d2835288c682dc3af05cc0d9dc8759767f16f845884dc7d0a7a"
+ },
+ {
+  "function": "osRecvMesg",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 292-byte function fingerprint 82c5b08ea5bc25a71b930b65161044bca0a6872c; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623832.7825322,
+  "score_before": 582,
+  "score_after": 0
+ },
+ {
+  "function": "osSendMesg",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 304-byte function fingerprint 7970ceb9533e0779b032c26a6b8787ad209eb812; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; libultra 2.0H / LIBGULTRA_ROM.A / sha256:57ddc0a4d24548bbf301ad8bb9de60a69e9e79f84fc1024d8e634cac5c048629. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623884.0753222,
+  "score_before": 1013,
+  "score_after": 0
+ },
+ {
+  "function": "__rmonSendFault",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 92-byte function fingerprint 4ba3cef3bda0e9bd73c2cd3e4028099f21882aef; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623895.0258482,
+  "score_before": 248,
+  "score_after": 0
+ },
+ {
+  "function": "__rmonIOflush",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 60-byte function fingerprint c1323c31f97e448a1e47b486e0aed1ecf40f0a45; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623951.436599,
+  "score_before": 0,
+  "score_after": 0,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:87276fd0ac07acbf3f97b216a176ef1b1352e0851f132dea28acfb086d7bc2eb"
+ },
+ {
+  "function": "__rmonIOputw",
+  "text": "exact relocation-normalized SDK signature. Exact relocation-normalized 92-byte function fingerprint 4f69b717129a5fd82fb3fea7b142c84e4efd3055; one name across selected SDK signatures, unique target fingerprint. Libraries: LIB 2.0H / LIBGULTR.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413; built in / decompals/ultralib e24c836796df; libUltra 2.0H; libultra 2.0H / LIBGULTRA.A / sha256:a208d80b8f279749e2aa2b155bbd9ccbb101e9f5175787dbaf10b0d372fd7413. Name inferred from library code; not a verified C match.",
+  "by": "autopilot",
+  "created_at": 1795623985.100362,
+  "score_before": 851,
+  "score_after": 0
+ },
+ {
+  "function": "func_800479A0",
+  "text": "Profile probe: this saved C scores 120 under sn-n64-272-0001-as0004 -G8 -mips2 -O2 (its target loads a double with `ldc1`, which only the 0004 assembler writes (0001 writes two `lwc1`)), 220 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683594710",
+  "created_at": 1795628576.7229471,
+  "score_before": 220,
+  "score_after": 120
+ },
+ {
+  "function": "func_80010D14",
+  "text": "Profile probe: this saved C scores 255 under sn-n64-272-0001-as0004 -G0 -mips3 -O2 -mgas -meb -mhard-float (its target loads a double with `ldc1`, which only the 0004 assembler writes (0001 writes two `lwc1`)), 315 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683593759",
+  "created_at": 1795628903.875551,
+  "score_before": 315,
+  "score_after": 255
+ },
+ {
+  "function": "func_80060C04",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 -fschedule-insns -fschedule-insns2; review compiler settings before accepting\nCandidate C:\n/* identical to func_8003DA04 (matched), with its names changed by decompdecomp */\ns32 func_80033A90();\ns32 osRecvMesg();\ns32 osSendMesg();\nextern s32 D_800A39A0;\nextern char D_80067C70[];\nextern char D_800677A8[];\nextern char D_800B6FF8[];\n\nextern s32 D_80097950;\nextern char D_800A76C0[];\nextern char D_800A76B0[];\n\nvoid func_80060C04(void)\n{\n    s32 sp10;\n\n    if (D_80097950 == 0) {\n        D_80097950 = 1;\n        osCreateMesgQueue(D_800A76C0, D_800A76B0, 1);\n        osSendMesg(D_800A76C0, 0, 0);\n    }\n    osRecvMesg(D_800A76C0, &sp10, 1);\n}",
+  "by": "autopilot",
+  "created_at": 1795629102.968281,
+  "score_before": 60,
+  "score_after": 60,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:8f22bbef92e79baef9914db6907e5146bdbd4b4854dc5e9927152666c8d7033f"
+ },
+ {
+  "function": "func_80060C04",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 -fschedule-insns2; review compiler settings before accepting\nCandidate C:\ns32 func_80033A90();\ns32 osRecvMesg();\ns32 osSendMesg();\nextern s32 D_800A39A0;\nextern char D_80067C70[];\nextern char D_800677A8[];\nextern char D_800B6FF8[];\n\nextern s32 D_80097950;\nextern char D_800A76C0[];\nextern char D_800A76B0[];\n\nvoid func_80060C04(void)\n{\n    s32 sp10;\n\n    if (D_80097950 == 0) {\n        D_80097950 = 1;\n        osCreateMesgQueue(D_800A76C0, D_800A76B0, 1);\n        osSendMesg(D_800A76C0, 0, 0);\n    }\n    osRecvMesg(D_800A76C0, &sp10, 1);\n}",
+  "by": "autopilot",
+  "created_at": 1795629104.091883,
+  "score_before": 60,
+  "score_after": 60,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:8f22bbef92e79baef9914db6907e5146bdbd4b4854dc5e9927152666c8d7033f"
+ },
+ {
+  "function": "func_8006C3A4",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 -fschedule-insns -fschedule-insns2; review compiler settings before accepting\nCandidate C:\n/* identical to func_8003DA04 (matched), with its names changed by decompdecomp */\ns32 func_80033A90();\ns32 osRecvMesg();\ns32 osSendMesg();\nextern s32 D_800A39A0;\nextern char D_80067C70[];\nextern char D_800677A8[];\nextern char D_800B6FF8[];\n\nextern s32 D_80097DB0;\nextern char D_800ACBB0[];\nextern char D_800ACBA0[];\n\nvoid func_8006C3A4(void)\n{\n    s32 sp10;\n\n    if (D_80097DB0 == 0) {\n        D_80097DB0 = 1;\n        osCreateMesgQueue(D_800ACBB0, D_800ACBA0, 1);\n        osSendMesg(D_800ACBB0, 0, 0);\n    }\n    osRecvMesg(D_800ACBB0, &sp10, 1);\n}",
+  "by": "autopilot",
+  "created_at": 1795629291.0940642,
+  "score_before": 300,
+  "score_after": 300,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:ace4739608f592960f45faa7cfbd44fb8b3fee7ee8447d0f6c7c5ba3ed3ffd6c"
+ },
+ {
+  "function": "func_8006C3A4",
+  "text": "byte match with gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O1 -fschedule-insns2; review compiler settings before accepting\nCandidate C:\ns32 func_80033A90();\ns32 osRecvMesg();\ns32 osSendMesg();\nextern s32 D_800A39A0;\nextern char D_80067C70[];\nextern char D_800677A8[];\nextern char D_800B6FF8[];\n\nextern s32 D_80097DB0;\nextern char D_800ACBB0[];\nextern char D_800ACBA0[];\n\nvoid func_8006C3A4(void)\n{\n    s32 sp10;\n\n    if (D_80097DB0 == 0) {\n        D_80097DB0 = 1;\n        osCreateMesgQueue(D_800ACBB0, D_800ACBA0, 1);\n        osSendMesg(D_800ACBB0, 0, 0);\n    }\n    osRecvMesg(D_800ACBB0, &sp10, 1);\n}",
+  "by": "autopilot",
+  "created_at": 1795629292.5694861,
+  "score_before": 300,
+  "score_after": 300,
+  "handoff_inputs": "53ac714285bdfe5afde383645032da10a8c0fb56f2e548b3c101c0a14735fe69:1210e20c48929061b933aaa2b36f78ba6ee3af2e1ebf52f5e644e73a1e4aafe8:ace4739608f592960f45faa7cfbd44fb8b3fee7ee8447d0f6c7c5ba3ed3ffd6c"
+ },
+ {
+  "function": "__rmonSetGRegisters",
+  "text": "Profile probe: this saved C scores 1766 under gcc-2.7.2-kmc -G0 -mips3 -O2 -mgp32 -mfp32 (it is library code, and libultra was built with KMC GCC 2.7.2), 1976 under its own settings; not exact. Nothing was changed. Try its C with that compiler (try_compiler) before more source spellings; an exact result there is applied for this function only.",
+  "by": "permuter-184683595296",
+  "created_at": 1795629814.422409,
+  "score_before": 1976,
+  "score_after": 1766
+ }
+]

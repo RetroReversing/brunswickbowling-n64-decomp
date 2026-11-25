@@ -1,0 +1,14 @@
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef signed short s16;
+typedef signed int s32;
+typedef struct { u32 *breakAddress; u32 oldInstruction; } BreakInfo;
+typedef struct { s32 pad0; u8 code; u8 pad5[4]; u8 method; u8 padA[2]; s32 object; s32 bp; } ClrBkptRequest;
+typedef struct { s32 pad0; u8 code; u8 pad5; s16 error; s32 pad8; s32 object; s32 bp; s32 pad14; } BkptReply;
+extern BreakInfo rmon_RCPbreakpoints[];
+extern BreakInfo rmon_breakpoints[];
+extern u32 func_80006A98(u32 *);
+extern void func_80006A50(u32 *, u32);
+extern void func_800031F0(void *, s32);
+extern void func_80005350(void *, s32);
+extern void func_800073F8(void *, s32, s32);

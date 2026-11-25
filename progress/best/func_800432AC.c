@@ -1,0 +1,111 @@
+/* machine draft (m2c) for gcc-2.7.2-kmc -G0 -mips3 -mgp32 -mfp32 -O2, tried by autopilot */
+#ifndef M2C_DEFINES
+#define M2C_DEFINES
+typedef s32 M2C_UNK;
+typedef s8 M2C_UNK8;
+typedef s16 M2C_UNK16;
+typedef s32 M2C_UNK32;
+#define M2C_FIELD(expr, type_ptr, offset) (*(type_ptr)((s8 *)(expr) + (offset)))
+#define M2C_BITWISE(type, expr) ((type)(expr))
+#define M2C_ERROR(desc) (0)
+#define M2C_CARRY 0
+#define M2C_OVERFLOW(a) (0)
+#endif
+
+M2C_UNK func_80036F08(M2C_UNK *, M2C_UNK *, M2C_UNK *, M2C_UNK); /* extern */
+M2C_UNK func_80037034(M2C_UNK *, M2C_UNK, M2C_UNK); /* extern */
+M2C_UNK func_8003732C(M2C_UNK *, M2C_UNK);          /* extern */
+M2C_UNK func_8003933C(M2C_UNK *, M2C_UNK *, M2C_UNK *); /* extern */
+M2C_UNK func_80039500();                            /* extern */
+M2C_UNK func_80039540();                            /* extern */
+extern M2C_UNK D_80079724;
+extern M2C_UNK D_80079760;
+extern M2C_UNK D_80079768;
+extern M2C_UNK D_80079774;
+extern M2C_UNK D_80079780;
+extern M2C_UNK D_8007978C;
+extern M2C_UNK D_80079798;
+extern M2C_UNK D_800797A4;
+extern M2C_UNK D_800797B0;
+extern M2C_UNK D_800797BC;
+extern M2C_UNK D_800797C8;
+extern M2C_UNK D_800797D0;
+extern M2C_UNK D_800797DC;
+extern M2C_UNK D_800797E4;
+extern M2C_UNK D_800797EC;
+extern M2C_UNK D_800797F4;
+extern M2C_UNK D_800797FC;
+extern M2C_UNK D_80079804;
+extern M2C_UNK D_8007980C;
+extern f32 D_80079818;
+extern M2C_UNK D_8008BD10;
+extern M2C_UNK D_8008BD50;
+extern M2C_UNK D_8008BE90;
+extern M2C_UNK D_8008C2D0;
+extern M2C_UNK D_8008CCF0;
+extern M2C_UNK D_8008CD70;
+extern M2C_UNK D_8008CDB0;
+extern M2C_UNK D_8008CDF0;
+extern M2C_UNK D_8008CE30;
+extern M2C_UNK D_8008CE70;
+extern M2C_UNK D_8008CEB0;
+extern M2C_UNK D_8008CEEC;
+extern M2C_UNK D_8008CF28;
+extern M2C_UNK D_8008CFE8;
+extern M2C_UNK D_8008D2E8;
+extern M2C_UNK D_8008D5E8;
+extern M2C_UNK D_8008E860;
+extern M2C_UNK D_8008E8A0;
+extern M2C_UNK D_8008E920;
+extern M2C_UNK D_8008E960;
+extern M2C_UNK D_8008F0BC;
+extern M2C_UNK D_8008F0FC;
+extern M2C_UNK D_8008F13C;
+extern M2C_UNK D_8008F17C;
+extern M2C_UNK func_80013E40;
+
+void func_800432AC(void) {
+    func_80039500();
+    func_8003933C(&D_8008CEB0, &D_80079760, &D_8008D2E8);
+    func_8003933C(&D_8008CF28, &D_80079768, &D_8008D5E8);
+    func_8003933C(&D_8008CEEC, &D_80079774, &D_8008CFE8);
+    func_80039540();
+    func_80036F08(&D_8008CD70, &D_80079780, &D_80079724, 0);
+    func_80036F08(&D_8008CE30, &D_8007978C, &D_80079724, 0);
+    func_80036F08(&D_8008CDB0, &D_80079798, &D_80079724, 0);
+    func_80036F08(&D_8008CDF0, &D_800797A4, &D_80079724, 0);
+    func_80036F08(&D_8008CCF0, &D_800797B0, &D_80079724, 0);
+    func_80036F08(&D_8008CE70, &D_800797BC, &D_80079724, 0);
+    func_80036F08(&D_8008E8A0, &D_800797C8, &D_80079724, 0);
+    func_80036F08(&D_8008E960, &D_800797D0, &D_80079724, 0);
+    func_80036F08(&D_8008E860, &D_800797DC, &D_80079724, 0);
+    func_80036F08(&D_8008E920, &D_800797E4, &D_80079724, 0);
+    func_80036F08(&D_8008BD10, &D_800797EC, &D_80079724, 0);
+    func_80037034(&D_8008BD10, 0x1C, 1);
+    func_80037034(&D_8008BD10, 0x1E, 1);
+    M2C_FIELD(&D_8008BD10, M2C_UNK **, 0x38) = &func_80013E40;
+    func_8003732C(&D_8008BD10, 2);
+    func_80036F08(&D_8008BD50, &D_800797EC, &D_80079724, 0);
+    func_80037034(&D_8008BD50, 0x1C, 2);
+    func_80037034(&D_8008BD50, 0x1E, 1);
+    M2C_FIELD(&D_8008BD50, M2C_UNK **, 0x38) = &func_80013E40;
+    func_8003732C(&D_8008BD50, 2);
+    M2C_FIELD(&D_8008BD50, f32 *, 0x2C) = (f32) D_80079818;
+    M2C_FIELD(&D_8008BD50, f32 *, 0x30) = (f32) D_80079818;
+    func_80036F08(&D_8008BE90, &D_800797E4, &D_80079724, 0);
+    func_80036F08(&D_8008F0BC, &D_800797F4, &D_80079724, 0);
+    M2C_FIELD(&D_8008F0BC, s16 *, 0x10) = 0x53;
+    M2C_FIELD(&D_8008F0BC, s16 *, 0x12) = 0x14;
+    func_8003732C(&D_8008F0BC, 2);
+    func_80036F08(&D_8008F0FC, &D_800797FC, &D_80079724, 0);
+    M2C_FIELD(&D_8008F0FC, s16 *, 0x10) = 0x153;
+    M2C_FIELD(&D_8008F0FC, s16 *, 0x12) = 0x14;
+    func_8003732C(&D_8008F0FC, 2);
+    func_80036F08(&D_8008F13C, &D_80079804, &D_80079724, 0);
+    M2C_FIELD(&D_8008F13C, s16 *, 0x10) = 0x1E0;
+    M2C_FIELD(&D_8008F13C, s16 *, 0x12) = 4;
+    func_80036F08(&D_8008C2D0, &D_80079804, &D_80079724, 0);
+    M2C_FIELD(&D_8008C2D0, s16 *, 0x10) = 0x1E0;
+    M2C_FIELD(&D_8008C2D0, s16 *, 0x12) = 4;
+    func_80036F08(&D_8008F17C, &D_8007980C, &D_80079724, 0);
+}

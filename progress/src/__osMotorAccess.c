@@ -1,0 +1,72 @@
+/* identical to __osMotorAccess in HARVESTMOON64 (local match library) (matched), with its names changed by decompdecomp */
+/* identical to __osMotorAccess in Gex 3 Deep Cover Gec (local match library) (matched), with its names changed by decompdecomp */
+/* identical to func_800223A0 in FIGHTER DESTINY2 (local match library) (matched), with its names changed by decompdecomp */
+/* identical to __osMotorAccess in TARZAN (local match library) (matched), with its names changed by decompdecomp */
+/* identical to __osMotorAccess in DESTRUCT DERBY (local match library) (matched), with its names changed by decompdecomp */
+/* identical to __osMotorAccess in TWINE (local match library) (matched), with its names changed by decompdecomp */
+/* identical to __osMotorAccess in V-RALLY-PAL (local match library) (matched), with its names changed by decompdecomp */
+typedef struct OSMesgQueue_s OSMesgQueue;
+typedef void *OSMesg;
+typedef struct { int status; OSMesgQueue *queue; int channel; } OSPfs;
+typedef struct { u32 ramarray[15]; u32 pifstatus; } OSPifRam;
+typedef struct {
+      u8 dummy;
+      u8 txsize;
+      u8 rxsize;
+      u8 cmd;
+      u8 addrh;
+      u8 addrl;
+      u8 data[32];
+      u8 datacrc;
+} __OSContRamReadFormat;
+
+extern u8 D_800A7760;
+extern s32 osRecvMesg(OSMesgQueue *, OSMesg *, s32);
+extern s32 __osSiRawStartDma(s32, void *);
+void func_8006C3A4(void);
+void func_8006C410(void);
+static OSPifRam __MotorDataBuf[4] __attribute__((aligned(8)));
+
+/* Runs one rumble-pak command on the channel's 32-byte block. flag is the fill byte:
+   0 switches the motor off (expects CRC 0), anything else switches it on (expects CRC
+   0xEB). Returns 0 on success, 4 if the CRC is wrong, 5 if no pak is plugged in. */
+/* Runs one rumble-pak command on the channel's 32-byte block, switching the motor on or off. */ s32 __osMotorAccess(OSPfs *controller, s32 fillByte) {
+    int i;
+    s32 ret;
+    u8 *block = (u8 *)&__MotorDataBuf[controller->channel];
+
+    if (!(controller->status & 0x8)) {
+        return 5;
+    }
+
+    func_8006C3A4();
+    __MotorDataBuf[controller->channel].pifstatus = 1;
+    block += controller->channel;
+
+    for (i = 0; i < 32; i++) {
+        ((__OSContRamReadFormat *)block)->data[i] = fillByte;
+    }
+
+    D_800A7760 = 0xfe;
+    __osSiRawStartDma(1, &__MotorDataBuf[controller->channel]);
+    osRecvMesg(controller->queue, 0, 1);
+    ret = __osSiRawStartDma(0, &__MotorDataBuf[controller->channel]);
+    osRecvMesg(controller->queue, 0, 1);
+
+    ret = ((__OSContRamReadFormat *)block)->rxsize & 0xC0;
+    if (!ret) {
+        if (!fillByte) {
+            if (((__OSContRamReadFormat *)block)->datacrc != 0) {
+                ret = 0x4;
+            }
+        } else {
+            if (((__OSContRamReadFormat *)block)->datacrc != 0xEB) {
+                ret = 0x4;
+            }
+        }
+    }
+
+    func_8006C410();
+
+    return ret;
+}

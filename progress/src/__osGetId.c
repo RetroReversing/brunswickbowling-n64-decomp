@@ -1,0 +1,23 @@
+/* identical to __osGetId in Gex 3 Deep Cover Gec (local match library) (matched), with its names changed by decompdecomp */
+/* identical to func_80024488 in FIGHTER DESTINY2 (local match library) (matched), with its names changed by decompdecomp */
+/* identical to __osGetId in TARZAN (local match library) (matched), with its names changed by decompdecomp */
+/* identical to func_80076AE8 in DESTRUCT DERBY (local match library) (matched), with its names changed by decompdecomp */
+/* identical to func_800561A8 in BATTLEZONE (local match library) (matched), with its names changed by decompdecomp */
+/* identical to __osGetId in BASSMASTERS2000 (local match library) (matched), with its names changed by decompdecomp */
+/* identical to __osGetId in Asteroids Hyper 64 (local match library) (matched), with its names changed by decompdecomp */
+/* identical to __osGetId in TWINE (local match library) (matched), with its names changed by decompdecomp */
+typedef struct {u8 pad00[4];s32 channel; s32 id; u8 pad0c[0x40]; s32 version,dir_size,inode_size,bank,off5c; s32 off60; volatile u8 status64; u8 status;} OSPfs;
+s32 __osPfsSelectBank(OSPfs*,s32);s32 __osContRamRead(s32,s32,s32,u16*);s32 __osCheckPackId(OSPfs*,u16*);s32 __osRepairPackId(OSPfs*,u16*,u16*);void bcopy(u16*,void*,s32);
+
+/* Sums the 14 words of a pak ID block: the checksum pair is stored at words 14 and 15. */
+static __inline__ void checksum(u16 *ptr,u16 *sum,u16 *inv){u16 *end=ptr+14;*sum=*inv=0;do{u16 x=*ptr++;u16 a=*sum;u16 b=*inv;*sum=a+x;*inv=b+~x;}while(ptr<end);}
+
+/* Reads the pak's ID block (page 1), validates or repairs it, copies it into the
+ * OSPfs header, and reads the directory block. Returns 0 on success, else an error code. */
+s32 __osGetId(OSPfs *pfs){u16 idBlockRaw[16];u16 idBlockFixed[16];u16 checksumSum,checksumInv;s32 ret;u16 *idBlock;u8 bankCount;
+if(pfs->status!=0){ret=__osPfsSelectBank(pfs,0);if(ret!=0)return ret;}ret=__osContRamRead(pfs->channel,pfs->id,1,idBlockRaw);if(ret!=0)return ret;
+checksum(idBlockRaw,&checksumSum,&checksumInv);idBlock=idBlockRaw;
+if(idBlockRaw[14]!=checksumSum||idBlockRaw[15]!=checksumInv){ret=__osCheckPackId(pfs,idBlock);if(ret==10){ret=__osRepairPackId(pfs,idBlock,idBlockFixed);if(ret!=0)return ret;idBlock=idBlockFixed;}else if(ret!=0)return ret;}
+if(!(idBlock[12]&1)){ret=__osRepairPackId(pfs,idBlock,idBlockFixed);if(ret!=0)return ret;idBlock=idBlockFixed;if(!(idBlock[12]&1))return 11;}
+bcopy(idBlock,(u8*)pfs+0xc,0x20);pfs->version=((u8*)idBlock)[0x1B];bankCount=((u8*)idBlock)[0x1A];pfs->dir_size=0x10;pfs->inode_size=8;pfs->status64=bankCount;pfs->off60=bankCount*2+3;pfs->bank=(pfs->status64+1)*8;pfs->off5c=pfs->bank+pfs->status64*8;
+ret=__osContRamRead(pfs->channel,pfs->id,7,(u16*)((u8*)pfs+0x2c));if(ret!=0)return ret;return 0;}
